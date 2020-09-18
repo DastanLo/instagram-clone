@@ -1,0 +1,18 @@
+.error {
+    width: 100%;
+    padding: 0.75rem 0.50rem 0.75rem 0.50rem;
+    border-radius: 0.25rem;
+    border: 1px solid #f5c6cb;
+    color: #721c24;
+    background-color: #f8d7da;
+    display: flex;
+    justify-content: right;
+}
+.errorCloseBtn {
+    font-size: 17px;
+    cursor: pointer;
+    border: none;
+    background: #f8d7da;
+    color: #721c24;
+    margin-left: auto;
+}

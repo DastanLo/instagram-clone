@@ -1,0 +1,91 @@
+.post {
+    border: 1px solid #DBDBDB;
+    margin-bottom: 40px;
+    max-width: 614px;
+}
+.post_header {
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #DBDBDB;
+}
+.post_settings {
+    font-size: 25px;
+    cursor: pointer;
+}
+.post_body img {
+    width: 100%;
+    height: auto;
+}
+.post_box {
+    display: flex;
+}
+.post_box i {
+    font-size: 25px;
+    padding: 8px;
+    background-size: 60%;
+    cursor: pointer;
+}
+.post_box a {
+    color: #8E8E8E;
+}
+.likes-number {
+    font-size: 16px;
+    color: #262626;
+    font-weight: 600;
+    margin-left: 8px;
+}
+.post_description {
+    display: flex;
+    margin: 8px;
+    align-items: center;
+}
+.post_description span {
+    font-size: 15px;
+    color: #262626;
+    font-weight: bold;
+    margin-right: 5px;
+}
+.post_description p {
+    color: #262626;
+}
+.post_comments{
+    color: #8E8E8E;
+    margin: 8px;
+    cursor: pointer;
+}
+.post_comments a {
+    color: #8E8E8E;
+}
+.post_comments p {
+    margin-top: 7px;
+    color: #262626;
+}
+.post_footer {
+    border: 1px solid #EFEFEF;
+    padding: 8px 16px;
+    display: flex;
+    justify-content: space-between;
+}
+.post_footer input{
+    border: none;
+    width: 80%;
+    background: transparent;
+    padding: 8px 5px;
+    outline: none;
+}
+.post_footer input::placeholder {
+    color: #8E8E8E;
+}
+.post_footer button {
+    border: none;
+    color: darkturquoise;
+    cursor: pointer;
+    background: transparent;
+    outline: none;
+}
+.post_date {
+    font-weight: 300;
+    margin-top: 10px;
+}

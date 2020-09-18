@@ -1,0 +1,25 @@
+.comment div:first-child{
+    display: flex;
+    align-items: center;
+    color: #262626;
+    justify-content: space-between;
+}
+.comment_text {
+    word-break: break-word;
+    line-height: 25px;
+    align-self: flex-start;
+    padding: 14px 10px 0;
+}
+.comment i {
+    cursor: pointer;
+}
+
+.comment-info {
+    color: #8E8E8E;
+    padding: 5px;
+    display: flex;
+    justify-content: center;
+}
+.comment-info span {
+    margin-right: 15px;
+}

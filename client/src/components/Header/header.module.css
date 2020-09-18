@@ -1,0 +1,112 @@
+.header {
+    background: #ffffff;
+    position: fixed;
+    top:0;
+    left: 0;
+    width: 100%;
+    border: 1px solid #DBDBDB;
+}
+.header_item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.logo {
+    background: url("/logo.png") no-repeat 0 50%;
+    background-size: contain;
+    width: 200px;
+    height: 50px;
+}
+.list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+.list li {
+    display: inline-block;
+    cursor: pointer;
+    font-size: 25px;
+    color: #262626;
+}
+.list a {
+    margin-right: 20px;
+}
+.list a:last-child {
+    margin-right: 0;
+}
+.search {
+    position: relative;
+}
+.search input {
+    text-align: center;
+    color: #8E8E8E;
+    padding: 7px;
+    border-radius: 3px;
+    border: 1px solid #DBDBDB;
+}
+.search i {
+    position: absolute;
+    top: 30%;
+    left: 5%;
+}
+
+.search input:focus{
+    outline-color: #3897F0;
+    text-align: left;
+}
+.search input:focus + i {
+    display: none;
+}
+.search_list {
+    max-height: 40vh;
+    background: #fff;
+    z-index: 10000;
+    position: absolute;
+    top: 45px;
+    left: 0;
+    border: 1px solid #DBDBDB;
+    max-width: 191px;
+    width: 100%;
+}
+.search_list div {
+    border-bottom: 1px solid #DBDBDB;
+    margin-bottom: 5px;
+    padding: 5px;
+}
+.search_list div:last-child {
+    border: none;
+}
+
+/*==================ADAPTIVE================*/
+@media screen and (max-width: 600px) {
+    .logo {
+        width: 100px;
+    }
+    .search input {
+        width: 80%;
+    }
+    .list li {
+        font-size: 18px;
+    }
+    .search_list {
+        max-width: 168px;
+    }
+}
+@media screen and (max-width: 454px) {
+    .logo {
+        display: none;
+    }
+    .header_item {
+        padding: 0 15px;
+        height: 50px;
+    }
+    .search input {
+        width: 70%;
+    }
+    .search_list {
+        max-width: 150px;
+    }
+    .list li {
+        font-size: 16px;
+    }
+}
