@@ -27,7 +27,7 @@ const MainPage = () => {
     dispatch(getUserInfo(user._id));
     dispatch(getPost());
     return (() => dispatch(resetUserInfo()));
-  }, [dispatch]);
+  }, [dispatch, user._id]);
 
   return (
     <div className="main-page">
