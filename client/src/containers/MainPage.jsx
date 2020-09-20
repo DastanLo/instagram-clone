@@ -4,6 +4,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import Post from '../components/Post/Post';
 import {addComment, getPost} from '../store/actions/postActions';
 import Spinner from '../components/UI/Spinner/Spinner';
+import {getUserInfo, resetUserInfo} from '../store/actions/userActions';
 
 
 const MainPage = () => {
@@ -23,7 +24,9 @@ const MainPage = () => {
   }
 
   useEffect(() => {
+    dispatch(getUserInfo(user._id));
     dispatch(getPost());
+    return (() => dispatch(resetUserInfo()));
   }, [dispatch]);
 
   return (

@@ -54,16 +54,17 @@ router.post('/', [auth, uploads.single('image')], async (req, res) => {
 
 router.post('/comment', [auth], async (req, res) => {
   try {
+    const commentData = {
+      user: req.user._id,
+      text: req.body.text,
+      _id: nanoid(),
+    };
     await Post.updateOne({_id: req.body.post}, {
       $push: {
-        comments: {
-          user: req.user._id,
-          text: req.body.text,
-          id: nanoid(),
-        },
+        comments: {...commentData},
       }
     });
-    return res.sendStatus(201);
+    return res.status(201).json({...commentData, user: req.user});
   } catch (e) {
     return res.status(400).json(e);
   }

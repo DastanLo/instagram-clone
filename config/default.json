@@ -1,7 +1,7 @@
 {
   "port": 5000,
   "jwtSecret": "secretKey for insta-clone app",
-  "mongoUri": "mongodb+srv://dastan:123456asd@cluster0.wznkj.azure.mongodb.net/instagram?retryWrites=true&w=majority",
+  "mongoUri": "mongodb+srv://dastan:123456asd@cluster0.6qh82.gcp.mongodb.net/instagram?retryWrites=true&w=majority",
   "baseUrl": "http://localhost:5000",
   "cloudinaryConfig": {
     "cloud_name": "dshzgegxx",

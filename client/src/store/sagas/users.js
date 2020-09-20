@@ -13,7 +13,7 @@ import {
   subscribeToUserError,
   subscribeToUserSuccess,
   updateProfileError,
-  updateProfileSuccess
+  updateProfileSuccess, userError
 } from "../actions/userActions";
 
 import {
@@ -53,7 +53,7 @@ export function* logoutUserSaga() {
     yield logoutUser();
     yield put(push('/'));
   } catch (e) {
-    console.log(e);
+    yield put(userError(e));
   }
 }
 
@@ -62,10 +62,10 @@ export function* searchUserSaga({user}) {
     const response = yield searchUserApi(user);
     yield put(searchUserSuccess(response.data));
   } catch (e) {
-    if (e.response.status === 401) {
+    if (e.response?.status === 401) {
       return yield put(logOutUser());
     }
-    console.log(e);
+    yield put(userError(e));
   }
 }
 
@@ -74,7 +74,7 @@ export function* getUserInfoSaga({id}) {
     const response = yield getUserInfoApi(id);
     yield put(getUserInfoSuccess(response.data));
   } catch (e) {
-    if (e.response.status === 401) {
+    if (e.response?.status === 401) {
       return yield put(logOutUser());
     }
     yield put(getUserInfoError(e.response.data));
@@ -86,7 +86,7 @@ export function* updateProfileSaga({newUserData}) {
     const response = yield updateProfile(newUserData);
     yield put(updateProfileSuccess(response.data));
   } catch (e) {
-    if (e.response.status === 401) {
+    if (e.response?.status === 401) {
       return yield put(logOutUser());
     }
     yield put(updateProfileError(e.response.data));
@@ -100,7 +100,7 @@ export function* subscribeToUserSaga({username}) {
     yield put(getUserPost(username));
     yield put(subscribeToUserSuccess());
   } catch (e) {
-    if (e.response.status === 401) {
+    if (e.response?.status === 401) {
       return yield put(logOutUser());
     }
     yield put(subscribeToUserError(e.response.data));
@@ -114,7 +114,7 @@ export function* unsubscribeToUserSaga({id}) {
     yield put(getUserInfo(id));
     yield put(getUserPost(id));
   } catch (e) {
-    if (e.response.status === 401) {
+    if (e.response?.status === 401) {
       return yield put(logOutUser());
     }
     yield put(subscribeToUserError(e.response.data));

@@ -2,6 +2,7 @@ import {ac} from "./actionTypes";
 
 export const authErrorReset = () => ({type: ac.AUTH_ERROR_RESET});
 export const resetUserInfo = () => ({type: ac.RESET_USER_INFO});
+export const userError = e => ({type: ac.USER_ERROR, e});
 
 export const registerUserSuccess = () => ({type: ac.REGISTER_USER_SUCCESS});
 export const registerUserFailure = error => ({type: ac.REGISTER_USER_FAILURE, error});

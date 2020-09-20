@@ -6,7 +6,6 @@ import {addComment, getOnePost} from '../store/actions/postActions';
 
 const PostInfoPage = () => {
   const post = useSelector(state => state.post.post);
-  const loading = useSelector(state => state.post.loading);
   const dispatch = useDispatch();
   const {id} = useParams();
 
@@ -14,7 +13,6 @@ const PostInfoPage = () => {
     if (!text) {
       return;
     }
-    //TODO: add sync comment;
     dispatch(addComment({
       post: id,
       text,
@@ -24,10 +22,6 @@ const PostInfoPage = () => {
   useEffect(() => {
     dispatch(getOnePost(id));
   }, [dispatch, id]);
-
-  // if(loading) {
-  //   return <Spinner show={loading}/>
-  // }
 
   return (
     <>

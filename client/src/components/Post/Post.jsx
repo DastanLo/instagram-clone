@@ -26,7 +26,7 @@ const Post = memo(({user, comments, id, onSubmitComment, date, description, like
 
   const addComment = (e) => {
     e.preventDefault();
-    dispatch(addCommentSync(id, thisUser, input));
+    dispatch(addCommentSync({id, user: thisUser, text: input}));
     onSubmitComment(input, id);
     setInput('');
   }
@@ -77,7 +77,8 @@ const Post = memo(({user, comments, id, onSubmitComment, date, description, like
       <div className="post_body">
         <img src={img} alt="post img"/>
         <div className="post_box">
-          <i onClick={likeThisPost} style={isLiked ? style : null} className={'far fa-heart' + (isLiked ? ' fas' : '')}/>
+          <i onClick={likeThisPost} style={isLiked ? style : null}
+             className={'far fa-heart' + (isLiked ? ' fas' : '')}/>
           <NavLink to={'/post/' + id}><i className="far fa-comment"/></NavLink>
           <i onClick={openModal} className="far fa-paper-plane"/>
         </div>

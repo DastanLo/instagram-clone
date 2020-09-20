@@ -25,15 +25,28 @@ const handlers = {
   [ac.CREATE_POST_ERROR]: (state, {error}) => ({...state, error, loading: false}),
   [ac.CREATE_POST_SUCCESS]: (state) => ({...state, error: null, loading: false}),
   [ac.RESET_POST_ERROR]: state => ({...state, error: null}),
-  [ac.COMMENT_POST_SYNC]: (state, {id, user, text}) => {
-    const newPosts = state.posts.map(post => {
-      if (post._id === id) {
-        post.comments.push({user, text, _id: Date.now, likes: [], date: Date.now()});
-      }
-      return post;
-    });
-    return {...state, posts: newPosts};
-  },
+  [ac.POST_ERROR]: (state, {e}) => ({...state, error: e, loading: false}),
+  [ac.COMMENT_POST_SYNC]: (state, {payload}) => {
+    const commentData = {
+      user: payload.user,
+      text: payload.text,
+      likes: [],
+      date: Date.now(),
+      _id: payload._id,
+    };
+    if (payload.onePost) {
+      console.log(payload);
+      return {...state, post: {...state.post, comments: [...state.post.comments, commentData]}};
+    } else {
+      const newPosts = state.posts.map(post => {
+        if (post._id === payload.id) {
+          post.comments.push({...commentData, _id: Date.now()});
+        }
+        return post;
+      });
+      return {...state, posts: newPosts};
+    }
+    },
   [ac.LIKE_POST_SYNC]: (state, {userId, id, isOnePost}) => {
     if (!isOnePost) {
       const posts = state.posts.map(post => {

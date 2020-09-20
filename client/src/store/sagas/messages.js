@@ -3,7 +3,14 @@ import {eventChannel} from 'redux-saga'
 import io from 'socket.io-client';
 import {API_URL} from '../../config/constants';
 import {ac} from '../actions/actionTypes';
-import {addNewMessage, getAllChats, getAllMessages, getChats} from '../actions/messageAction';
+import {
+  addNewMessage,
+  getAllChats,
+  getAllMessages,
+  getChats,
+  getUserChatsStart,
+  stopChannel
+} from '../actions/messageAction';
 import {getUsersChats} from '../../api';
 import {logoutUser} from '../actions/userActions';
 
@@ -54,13 +61,14 @@ export function* subscribe(socket) {
 
 export function* getUserChatsSaga() {
   try {
+    yield put(getUserChatsStart());
     const response = yield getUsersChats();
     yield put(getAllChats(response.data));
   } catch (e) {
     if (e.response?.status === 401) {
       return yield put(logoutUser());
     }
-    console.log(e);
+    yield put(stopChannel());
   }
 }
 

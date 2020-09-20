@@ -7,9 +7,11 @@ import {NavLink} from 'react-router-dom';
 import {useDispatch, useSelector} from 'react-redux';
 import {likePost, likePostSync, sharePostToUser, unLikePost, unLikePostSync} from '../../store/actions/postActions';
 import Modal from '../UI/Modal/Modal';
+import Spinner from '../UI/Spinner/Spinner';
 
 const PostInfo = memo(({img, likes, id, user, onSubmit, description, comments}) => {
   const [input, setInput] = useState('');
+  const loading = useSelector(state => state.post.loading);
   const [open, setOpen] = useState(false);
   const [isLiked, setIsLiked] = useState(false);
   const thisUser = useSelector(state => state.user.user);
@@ -65,6 +67,7 @@ const PostInfo = memo(({img, likes, id, user, onSubmit, description, comments}) 
 
   return (
     <div className="post-info">
+      {loading ? <Spinner show={loading}/> : null}
       <div className="post-img">
         <img src={img} alt="postInfo"/>
       </div>

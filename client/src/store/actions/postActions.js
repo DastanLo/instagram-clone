@@ -13,9 +13,10 @@ export const getUserPosts = posts => ({type: ac.LOAD_USER_POSTS_SUCCESS, posts})
 export const getUserPost = (id) => ({type: ac.LOAD_USER_POSTS, id});
 
 export const resetPostError = () => ({type: ac.RESET_POST_ERROR})
+export const postError = (e) => ({type: ac.POST_ERROR, e});
 
 export const addComment = (commentData) => ({type: ac.COMMENT_POST, commentData});
-export const addCommentSync = (id, user, text) => ({type: ac.COMMENT_POST_SYNC, id, user, text});
+export const addCommentSync = (commentData) => ({type: ac.COMMENT_POST_SYNC, payload: commentData});
 
 export const likePost = (id) => ({type: ac.LIKE_POST, id});
 export const unLikePost = (id) => ({type: ac.UNLIKE_POST, id});

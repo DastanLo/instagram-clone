@@ -27,6 +27,7 @@ const handlers = {
   [ac.LOGIN_USER]: (state, {user}) => ({...state, user, error: null, loading: true}),
   [ac.LOGIN_USER_ERROR]: (state, {error}) => ({...state, error, loading: false}),
   [ac.LOG_OUT_USER]: state => ({...initialState}),
+  [ac.USER_ERROR]: (state, {e}) => ({...state, loading: false}),
   [ac.AUTH_ERROR_RESET]: state => ({...state, error: null}),
   [ac.UPDATE_PROFILE]: state => ({...state, loading: true}),
   [ac.UPDATE_PROFILE_ERROR]: (state, {error}) => ({...state, error, loading: false}),

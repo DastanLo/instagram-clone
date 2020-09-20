@@ -15,11 +15,14 @@ import {
 } from '../store/actions/messageAction';
 import Modal from '../components/UI/Modal/Modal';
 import {NavLink} from 'react-router-dom';
+import Spinner from '../components/UI/Spinner/Spinner';
 
 const DirectPage = () => {
   const [open, setOpen] = useState(false);
   const [input, setInput] = useState('');
   const ref = useRef(null);
+  const loading = useSelector(state => state.user.loading);
+  const chatLoading = useSelector(state => state.message.loading);
   const chatUserId = useSelector(state => state.message.chatUserId);
   const messages = useSelector(state => state.message.messages);
   const chats = useSelector(state => state.message.chats);
@@ -64,7 +67,11 @@ const DirectPage = () => {
 
   useEffect(() => {
     if (userInfo.username) {
-      ref.current.scrollIntoView({behavior: 'smooth'});
+      try{
+        ref.current.scrollIntoView({behavior: 'smooth'});
+      } catch {
+        //do nothing
+      }
     }
   }, [userInfo]);
 
@@ -81,7 +88,12 @@ const DirectPage = () => {
       dispatch(resetUserInfo());
     });
   }, [dispatch, user._id, chatUserId]);
-
+  if (chatLoading) {
+    return <Spinner show={chatLoading}/>
+  }
+  if (loading) {
+    return <Spinner show={loading}/>
+  }
   return (
     <div className="direct_page">
       <Modal show={open} close={closeModal}>
