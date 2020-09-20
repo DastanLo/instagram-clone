@@ -6,12 +6,11 @@
   "author": "Dastan <dastansulaimankulov98@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "start": "cross-env NODE_ENV=production node app.js",
     "server": "nodemon app.js",
-    "client": "yarn --cwd client start",
-    "client:install": "yarn --cwd client install",
-    "client:build": "yarn --cwd client build",
-    "dev": "cross-env NODE_ENV=development concurrently \"yarn run server\" \"yarn run client\""
+    "dev": "cross-env NODE_ENV=development concurrently \"yarn run server\" \"yarn run client\"",
+    "start-client": "cd client && yarn && yarn start",
+    "build": "yarn && cd client && yarn && yarn build",
+    "start": "cross-env NODE_ENV=production node app.js"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
@@ -30,5 +29,8 @@
     "concurrently": "^5.2.0",
     "cross-env": "^7.0.2",
     "nodemon": "^2.0.4"
+  },
+  "engines": {
+    "node": "12.18.0"
   }
 }

@@ -106,16 +106,16 @@ router.delete('/login', [auth], async (req, res) => {
 router.post('/subscribe', [auth], async (req, res) => {
   const {id} = req.body;
   try {
-    // await User.updateOne({_id: req.user._id}, {
-    //   $push: {
-    //     follows: id,
-    //   }
-    // }, {runValidators: true});
-    // await User.updateOne({_id: id}, {
-    //   $push: {
-    //     followers: req.user._id,
-    //   }
-    // }, {runValidators: true});
+    await User.updateOne({_id: req.user._id}, {
+      $push: {
+        follows: id,
+      }
+    }, {runValidators: true});
+    await User.updateOne({_id: id}, {
+      $push: {
+        followers: req.user._id,
+      }
+    }, {runValidators: true});
     res.sendStatus(200);
   } catch (e) {
     res.status(500).send(e);
