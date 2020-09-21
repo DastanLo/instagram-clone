@@ -73,7 +73,7 @@ const DirectPage = () => {
     if (currentUser) {
       try{
         ref.current.scrollIntoView({behavior: 'smooth'});
-      } catch {
+      } catch(e) {
         //do nothing
       }
     }

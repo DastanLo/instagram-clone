@@ -60,6 +60,7 @@
 }
 .search_list {
     max-height: 40vh;
+    overflow: scroll;
     background: #fff;
     z-index: 30000;
     position: absolute;
