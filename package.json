@@ -6,7 +6,7 @@
   "author": "Dastan <dastansulaimankulov98@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "server": "nodemon app.js",
+    "server": "cross-env NODE_ENV=development nodemon app.js",
     "build": "cd client && yarn install && yarn build",
     "start": "cross-env NODE_ENV=production node app.js"
   },

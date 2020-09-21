@@ -5,7 +5,7 @@ import {getUserPost} from '../store/actions/postActions';
 import {
   getUserIdForChat,
   getUserInfo,
-  logoutUser, resetUserInfo,
+  logoutUser,
   subscribeToUser,
   unSubscribeToUser,
   updateProfile
@@ -47,7 +47,6 @@ const ProfilePage = () => {
 
   const subscribe = () => {
     dispatch(subscribeToUser(id));
-    setIsSubscribed(true);
   };
 
   const logout = () => {
@@ -56,13 +55,43 @@ const ProfilePage = () => {
 
   const unSubscribe = () => {
     dispatch(unSubscribeToUser(id));
-    setIsSubscribed(false);
   }
 
   const writeMessage = () => {
     dispatch(getUserIdForChat(id));
     history.push('/user/messages/');
   };
+
+
+  const closeModal = () => {
+    setShow(null);
+  }
+
+  const inputChangeHandler = (e) => {
+    if (e.target.files[0]) {
+      const formData = new FormData();
+      formData.append('avatar', e.target.files[0]);
+      dispatch(updateProfile(formData));
+    }
+  }
+
+  useEffect(() => {
+    dispatch(getUserInfo(id));
+    dispatch(getUserPost(id));
+    return (() => {
+      setShow(null);
+    })
+  }, [dispatch, id]);
+
+  useEffect(() => {
+    const userSubList = user.followers.map(u => u._id);
+    if (userSubList.includes(thisUser._id)) {
+      setIsSubscribed(true);
+    }
+    return (() => {
+      setIsSubscribed(false);
+    });
+  }, [user, thisUser, dispatch]);
 
   const changeButton = () => {
     if (isSubscribed) {
@@ -82,37 +111,6 @@ const ProfilePage = () => {
       </>
     )
   }
-
-  const closeModal = () => {
-    setShow(null);
-  }
-
-  const inputChangeHandler = (e) => {
-    if (e.target.files[0]) {
-      const formData = new FormData();
-      formData.append('avatar', e.target.files[0]);
-      dispatch(updateProfile(formData));
-    }
-  }
-
-  useEffect(() => {
-    dispatch(getUserInfo(id));
-    dispatch(getUserPost(id));
-    return (() => {
-      setShow(null);
-      dispatch(resetUserInfo());
-    })
-  }, [dispatch, id]);
-
-  useEffect(() => {
-    const userSubList = user.followers.map(u => u._id);
-    if (userSubList.includes(thisUser._id)) {
-      setIsSubscribed(true);
-    }
-    return (() => {
-      setIsSubscribed(false);
-    });
-  }, [user, thisUser, dispatch]);
 
   if (error) {
     return <div className="profile">

@@ -1,8 +1,8 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React, {useCallback, useEffect, useRef, useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import User from '../components/User/User';
 import '../components/Post/post.css';
-import {getUserIdForChat, getUserInfo, resetUserInfo} from '../store/actions/userActions';
+import {getUserIdForChat} from '../store/actions/userActions';
 import {
   addNewMessageLocal,
   getChat,
@@ -20,8 +20,8 @@ import Spinner from '../components/UI/Spinner/Spinner';
 const DirectPage = () => {
   const [open, setOpen] = useState(false);
   const [input, setInput] = useState('');
+  const [currentUser, setCurrentUser] = useState(null);
   const ref = useRef(null);
-  const loading = useSelector(state => state.user.loading);
   const chatLoading = useSelector(state => state.message.loading);
   const chatUserId = useSelector(state => state.message.chatUserId);
   const messages = useSelector(state => state.message.messages);
@@ -38,71 +38,75 @@ const DirectPage = () => {
     setOpen(true);
   };
 
-  const closeModal = () => {
+  const closeModal = useCallback(() => {
     setOpen(false);
-  };
+  },[]);
 
-  const writeToUser = (id) => {
-    dispatch(getUserIdForChat(id));
+  const writeToUser = useCallback((writeUser) => {
+    setCurrentUser(writeUser)
+    dispatch(getUserIdForChat(writeUser._id));
     closeModal();
-  };
+  },[dispatch, closeModal]);
 
   const sendMessage = (e) => {
     e.preventDefault();
     const message = {
       message: input,
       sender: user._id,
-      users: [user._id, userInfo._id],
+      users: [user._id, currentUser._id],
     };
     dispatch(sendNewMessage(message));
     dispatch(addNewMessageLocal(message));
     setInput('');
   };
 
-  const openChat = (chat_id, userId) => {
-    dispatch(getChats(user._id));
-    dispatch(getUserInfo(userId));
+  const openChat = useCallback((chat_id, selectedUser) => {
+    setCurrentUser(selectedUser);
+    if (chatUserId) {
+      dispatch(getChats(user._id));
+    }
+    dispatch(resetMessages());
     dispatch(getMessages(chat_id));
-  };
+  },[dispatch, user._id, chatUserId]);
 
   useEffect(() => {
-    if (userInfo.username) {
+    if (currentUser) {
       try{
         ref.current.scrollIntoView({behavior: 'smooth'});
       } catch {
         //do nothing
       }
     }
-  }, [userInfo]);
+  }, [currentUser]);
+
+  useEffect(() => {
+    if (chatUserId) {
+      if (userInfo._id === chatUserId) {
+        setCurrentUser(userInfo);
+      }
+      dispatch(getChat([chatUserId, user._id]));
+    }
+  },[chatUserId, user._id, dispatch, userInfo]);
 
   useEffect(() => {
     dispatch(startChannel(user._id));
     dispatch(getChats(user._id));
-    if (chatUserId) {
-      dispatch(getUserInfo(chatUserId));
-      dispatch(getChat([chatUserId, user._id]));
-    }
     return (() => {
       dispatch(stopChannel(true));
+      setCurrentUser(null);
       dispatch(resetMessages());
-      dispatch(resetUserInfo());
     });
-  }, [dispatch, user._id, chatUserId]);
-  if (chatLoading) {
-    return <Spinner show={chatLoading}/>
-  }
-  if (loading) {
-    return <Spinner show={loading}/>
-  }
+  }, [dispatch, user._id]);
   return (
     <div className="direct_page">
+      {chatLoading ? <Spinner/>: null}
       <Modal show={open} close={closeModal}>
         {user.follows.map(user => {
           return <User fullName={user.fullName}
                        id={user._id}
                        image={user.image}
                        name={user.username}
-                       key={user._id} click={() => writeToUser(user._id)}/>
+                       key={user._id} click={writeToUser.bind(null, user)}/>
         })}
       </Modal>
       <div className="contacts">
@@ -115,7 +119,7 @@ const DirectPage = () => {
               return <User name={chat.users[0].username}
                            fullName={chat.users[0].fullName}
                            image={chat.users[0].avatar}
-                           click={() => openChat(chat._id, chat.users[0]._id)}
+                           click={openChat.bind(null, chat._id, chat.users[0])}
                            key={chat._id}
                            id={chat.users[0]._id}/>
             })
@@ -124,12 +128,12 @@ const DirectPage = () => {
       </div>
       <div className="message_window">
         {
-          userInfo.username ?
+          currentUser ?
             <div className="message_window_header">
-              <User fullName={userInfo.fullName}
-                    id={userInfo._id}
-                    image={userInfo.avatar}
-                    name={userInfo.username}/>
+              <User fullName={currentUser.fullName}
+                    id={currentUser._id}
+                    image={currentUser.avatar}
+                    name={currentUser.username}/>
             </div>
             : <button onClick={openModal} className="btn">
               Отправить Сообщение
@@ -163,7 +167,7 @@ const DirectPage = () => {
           })
         }
         <div ref={ref}/>
-        {userInfo.username ?
+        {currentUser ?
           <form className="post_footer" onSubmit={sendMessage}>
             <input
               type="text"

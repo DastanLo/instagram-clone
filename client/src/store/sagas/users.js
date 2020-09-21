@@ -1,7 +1,6 @@
 import {put} from "redux-saga/effects";
 import {push} from "connected-react-router";
 import {
-  getUserInfo,
   getUserInfoError,
   getUserInfoSuccess,
   loginUserFailure,
@@ -13,7 +12,8 @@ import {
   subscribeToUserError,
   subscribeToUserSuccess,
   updateProfileError,
-  updateProfileSuccess, userError
+  updateProfileSuccess,
+  userError
 } from "../actions/userActions";
 
 import {
@@ -26,7 +26,6 @@ import {
   unSubscribeToUser,
   updateProfile
 } from "../../api";
-import {getUserPost} from '../actions/postActions';
 
 export function* registerUserSaga({userData}) {
   try {
@@ -96,8 +95,6 @@ export function* updateProfileSaga({newUserData}) {
 export function* subscribeToUserSaga({username}) {
   try {
     yield subscribeToUser(username);
-    yield put(getUserInfo(username));
-    yield put(getUserPost(username));
     yield put(subscribeToUserSuccess());
   } catch (e) {
     if (e.response?.status === 401) {
@@ -111,8 +108,6 @@ export function* unsubscribeToUserSaga({id}) {
   try {
     yield unSubscribeToUser(id);
     yield put(subscribeToUserSuccess());
-    yield put(getUserInfo(id));
-    yield put(getUserPost(id));
   } catch (e) {
     if (e.response?.status === 401) {
       return yield put(logOutUser());

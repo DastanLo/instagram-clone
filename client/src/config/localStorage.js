@@ -22,7 +22,7 @@ export const loadFromLocalStorage = () => {
   }
 };
 
-const actions = [ac.LOGIN_USER_SUCCESS, ac.LOG_OUT_USER, ac.UPDATE_PROFILE_SUCCESS];
+const actions = [ac.LOGIN_USER_SUCCESS, ac.LOG_OUT_USER, ac.UPDATE_PROFILE_SUCCESS, ac.UNSUBSCRIBE_USER, ac.SUBSCRIBE_USER];
 
 export const localStorageMiddleware = store => next => action => {
   let result = next(action);

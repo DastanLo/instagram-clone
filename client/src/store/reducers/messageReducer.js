@@ -15,10 +15,12 @@ const handlers = {
   [ac.GET_CHAT_USER_ID]: (state, {id}) => ({...state, chatUserId: id}),
   [ac.RESET_MESSAGES]: (state) => ({...state, messages: [], chatUserId: null}),
   [ac.GET_ALL_CHATS_START]: state => ({...state, loading: true}),
+  [ac.GET_MESSAGES]: state => ({...state, loading: true}),
   [ac.GET_ALL_MESSAGES]: (state, {messages}) => ({
     ...state,
     messages: messages.messages,
-    currentChat: messages.chat_id
+    currentChat: messages.chat_id,
+    loading: false,
   }),
   [ac.ADD_NEW_MESSAGE_LOCAL]: (state, {message}) => ({
     ...state,

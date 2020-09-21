@@ -36,6 +36,7 @@
 }
 .search {
     position: relative;
+    z-index: 1000000;
 }
 .search input {
     text-align: center;
@@ -60,7 +61,7 @@
 .search_list {
     max-height: 40vh;
     background: #fff;
-    z-index: 10000;
+    z-index: 30000;
     position: absolute;
     top: 45px;
     left: 0;

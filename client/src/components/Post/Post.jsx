@@ -1,4 +1,4 @@
-import React, {memo, useEffect, useState} from 'react';
+import React, {memo, useCallback, useEffect, useState} from 'react';
 import './post.css';
 import User from '../User/User';
 import {useDispatch, useSelector} from 'react-redux';
@@ -29,7 +29,7 @@ const Post = memo(({user, comments, id, onSubmitComment, date, description, like
     dispatch(addCommentSync({id, user: thisUser, text: input}));
     onSubmitComment(input, id);
     setInput('');
-  }
+  };
 
   const likeThisPost = async () => {
     if (isLiked) {
@@ -56,9 +56,9 @@ const Post = memo(({user, comments, id, onSubmitComment, date, description, like
     setOpen(true);
   };
 
-  const closeModal = () => {
+  const closeModal = useCallback(() => {
     setOpen(false);
-  };
+  },[]);
 
   useEffect(() => {
     if (likes.includes(thisUser._id)) {
@@ -118,7 +118,7 @@ const Post = memo(({user, comments, id, onSubmitComment, date, description, like
                     image={user.avatar}
                     id={user._id}
                     fullName={user.fullName}/>
-              <button onClick={() => sharePost(user._id)}>Отправить</button>
+              <button onClick={sharePost.bind(null, user._id)}>Отправить</button>
             </div>
           }) :
           <div>

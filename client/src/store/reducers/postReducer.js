@@ -35,7 +35,6 @@ const handlers = {
       _id: payload._id,
     };
     if (payload.onePost) {
-      console.log(payload);
       return {...state, post: {...state.post, comments: [...state.post.comments, commentData]}};
     } else {
       const newPosts = state.posts.map(post => {
