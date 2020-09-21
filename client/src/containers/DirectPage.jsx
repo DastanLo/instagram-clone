@@ -50,6 +50,9 @@ const DirectPage = () => {
 
   const sendMessage = (e) => {
     e.preventDefault();
+    if (!input) {
+      return;
+    }
     const message = {
       message: input,
       sender: user._id,
