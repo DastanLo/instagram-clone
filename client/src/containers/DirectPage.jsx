@@ -73,14 +73,14 @@ const DirectPage = () => {
   },[dispatch, user._id, chatUserId]);
 
   useEffect(() => {
-    if (currentUser) {
+    if (messages.length > 0) {
       try{
         ref.current.scrollIntoView({behavior: 'smooth'});
       } catch(e) {
         //do nothing
       }
     }
-  }, [currentUser]);
+  }, [messages]);
 
   useEffect(() => {
     if (chatUserId) {
