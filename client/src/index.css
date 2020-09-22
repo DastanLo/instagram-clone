@@ -133,6 +133,7 @@ hr {
 
 .subscribes-block div:first-child span {
     font-size: 28px;
+    margin-right: 20px;
 }
 
 .subscribes-block div:nth-child(2) span {
@@ -146,7 +147,7 @@ hr {
 }
 
 .user_images img {
-    margin-right: 20px;
+    margin-right: 10px;
     margin-bottom: 30px;
     width: 300px;
     height: 293px;
@@ -210,6 +211,7 @@ hr {
 }
 
 .message_window {
+    box-sizing: border-box;
     border-radius: 5px;
     font-size: 20px;
     font-weight: normal;
@@ -227,12 +229,11 @@ hr {
 .message_window form {
     padding: 5px 0 5px 5px;
     margin-left: -10px;
-    box-sizing: content-box;
     z-index: 1000;
     background: #fafafa;
     position: fixed;
-    top: 81%;
-    width: 100%;
+    bottom: 12.5vh;
+    width: 52.7%;
     max-width: inherit;
 }
 
@@ -242,7 +243,7 @@ hr {
     position: fixed;
     z-index: 1000;
     background: #ffffff;
-    width: 100%;
+    width: 52.7%;
     max-width: inherit;
     border: 1px solid #DBDBDB;
     border-radius: 5px;
@@ -258,7 +259,6 @@ hr {
 .input__file {
     opacity: 0;
     visibility: hidden;
-    position: absolute;
 }
 
 .input__file-icon-wrapper {
@@ -435,7 +435,6 @@ hr {
     .fixed-block {
         right: 0;
     }
-
     .direct_page {
         justify-content: center;
     }
@@ -464,9 +463,12 @@ hr {
         line-height: 20px;
         padding: 7px 13px;
     }
+    .message_window form {
+        bottom: 15.5vh;
+    }
 
     .contacts {
-        width: 30%;
+        width: 35%;
     }
 
     .contacts_list {
@@ -515,16 +517,66 @@ hr {
     }
 
     .sub-mobile {
+        margin-bottom: 10px;
         display: flex;
+        justify-content: center;
+    }
+    .sub-mobile span {
+        margin-right: 10px;
     }
 
     .avatar img {
-        width: 100px;
-        height: 100px;
+        width: 70px;
+        height: 70px;
     }
 
+
     .user_images img {
-        width: 30%;
+        width: 31%;
         height: auto;
+    }
+}
+@media screen and (max-width: 460px){
+    .btn {
+        padding: 9px 6px;
+        font-size: 11px;
+    }
+    .subscribes-block div:first-child span {
+        line-height: 14px;
+        font-size: 14px;
+        padding-top: 5px;
+        margin-right: 10px;
+    }
+    .user_images {
+        justify-content: space-around;
+    }
+    .user_images img {
+        width: 100%;
+        height: auto;
+    }
+    .message_window {
+        flex-shrink: 1;
+    }
+    .message_window_header  div  a  span b{
+        font-size: 14px;
+    }
+    .contacts {
+        width: 40%;
+    }
+    .message_window form  > button {
+        font-size: 10px;
+    }
+    .message_window form > input::placeholder {
+        font-size: 10px;
+    }
+}
+@media screen and (max-height: 528px){
+    .message_window form {
+        bottom: 7.3vh;
+    }
+}
+@media screen and (max-height: 528px) and (max-width: 660px){
+    .message_window form {
+        bottom: 11.2vh;
     }
 }
