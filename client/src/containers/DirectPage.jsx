@@ -104,13 +104,16 @@ const DirectPage = () => {
     <div className="direct_page">
       {chatLoading ? <Spinner/>: null}
       <Modal show={open} close={closeModal}>
-        {user.follows.map(user => {
+        {user.follows.length ? user.follows.map(user => {
           return <User fullName={user.fullName}
                        id={user._id}
                        image={user.image}
                        name={user.username}
                        key={user._id} click={writeToUser.bind(null, user)}/>
-        })}
+        }) :
+        <div>
+          Вы ни на кого не подписаны, подпишитесь чтобы их имя отобразилось в списке
+        </div>}
       </Modal>
       <div className="contacts">
         <div className="direct_header">
