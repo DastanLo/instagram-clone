@@ -174,14 +174,14 @@ const DirectPage = () => {
         }
         <div ref={ref}/>
         {currentUser ?
-          <form className="post_footer" onSubmit={sendMessage}>
-            <input
-              type="text"
-              placeholder="Добавить Комментарий"
-              onChange={inputChangeHandler}
-              value={input}/>
-            <button type="submit">Опубликовать</button>
-          </form>
+            <form className="post_footer" onSubmit={sendMessage}>
+              <input
+                type="text"
+                placeholder="Добавить Комментарий"
+                onChange={inputChangeHandler}
+                value={input}/>
+              <button type="submit">Опубликовать</button>
+            </form>
           : null}
       </div>
     </div>

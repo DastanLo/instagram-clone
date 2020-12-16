@@ -112,7 +112,7 @@ const PostInfo = memo(({img, likes, id, user, onSubmit, description, comments}) 
                     image={user.avatar}
                     id={user._id}
                     fullName={user.fullName}/>
-              <button onClick={() => sharePost(user._id)}>Отправить</button>
+              <button onClick={sharePost.bind(null, user._id)}>Отправить</button>
             </div>
           }) :
           <div>

@@ -8,7 +8,7 @@ const User = memo(({name, fullName = null, image = null, id, click = null}) => {
     <div className="user" onClick={click}>
       <NavLink to={click ? '#' : '/profile/' + id}>
         <img src={image || defaultAvatar} alt="user avatar"/>
-        <span><b>{name}</b> {fullName ? <span>{fullName}</span> : null}</span>
+        <span><b>{name?.length > 18 ? name.slice(0, 14) : name}</b> {fullName ? <span>{fullName}</span> : null}</span>
       </NavLink>
     </div>
   );

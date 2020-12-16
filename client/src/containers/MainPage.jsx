@@ -44,18 +44,20 @@ const MainPage = () => {
           })
         }
       </div>
-      <div className="fixed-block">
-        <User id={user._id} image={user.avatar} name={user.username} fullName={user.fullName}/>
-        <div className="recommendation-box">
-          <div>Подписчики :</div>
-          {
-            user.followers.length
-              ? user.followers.slice(-5).map(user => {
-                return <User id={user._id} image={user.avatar} key={user._id} fullName={user.fullName}
-                             name={user.username}/>
-              })
-              : 'У вас нет подписчиков'
-          }
+      <div className="fixed">
+        <div className="fixed-block">
+          <User id={user._id} image={user.avatar} name={user.username} fullName={user.fullName}/>
+          <div className="recommendation-box">
+            <div>Подписчики :</div>
+            {
+              user.followers.length
+                ? user.followers.slice(-5).map(user => {
+                  return <User id={user._id} image={user.avatar} key={user._id} fullName={user.fullName}
+                               name={user.username}/>
+                })
+                : 'У вас нет подписчиков'
+            }
+          </div>
         </div>
       </div>
     </div>
