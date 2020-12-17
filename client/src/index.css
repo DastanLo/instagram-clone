@@ -213,6 +213,7 @@ hr {
 }
 
 .message_window {
+    width: 100%;
     flex-grow: 1;
     max-width: 700px;
     box-sizing: border-box;
@@ -234,18 +235,17 @@ hr {
     z-index: 1000;
     background: #fafafa;
     position: fixed;
-    bottom: 21.3%;
-    width: 100%;
+    bottom: 19.3%;
+    width: inherit;
     max-width: inherit;
 }
-
 .message_window_header {
     box-sizing: border-box;
     padding: 4px 0 3px 5px;
     position: fixed;
     z-index: 1000;
     background: #ffffff;
-    width: 100%;
+    width: inherit;
     max-width: inherit;
     border: 1px solid #DBDBDB;
     border-radius: 5px;
@@ -453,11 +453,12 @@ hr {
 }
 
 @media screen and (max-width: 660px) {
-    .message_window_header, .message_window form {
-        width: 60%;
+    .message_window_header {
+        width: 65%;
     }
     .message_window form {
-        bottom: 23.3%;
+        width: 65%;
+        bottom: 21.6%;
     }
     .message_window p {
         font-size: 13px;
@@ -466,7 +467,7 @@ hr {
         padding: 7px 13px;
     }
     .contacts {
-        max-width: 200px;
+        max-width: 150px;
     }
     .contacts_list {
         padding: 0 0 0 4px;
@@ -534,6 +535,13 @@ hr {
     }
 }
 @media screen and (max-width: 460px){
+    .message_window_header {
+        width: 55%;
+    }
+    .message_window form {
+        width: 55%;
+        bottom: 21.6%;
+    }
     .btn {
         padding: 9px 6px;
         font-size: 11px;
