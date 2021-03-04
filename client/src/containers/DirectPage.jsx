@@ -132,10 +132,10 @@ const DirectPage = () => {
           }
         </div>
       </div>
-      <div className="message_window">
+      <div className="message_window" style={{display: !currentUser ? 'flex' : 'block'}}>
         {
           currentUser ?
-            <div className="message_window_header">
+            <div className="message_window_header" >
               <User fullName={currentUser.fullName}
                     id={currentUser._id}
                     image={currentUser.avatar}
@@ -146,34 +146,41 @@ const DirectPage = () => {
             </button>
         }
         {
-          messages.map(message => {
-            if (message.sender === user._id) {
-              if (message.isLink) {
-                return <p key={message._id} className="from-me">
-                  <NavLink to={'/post/' + message.message}>
-                    Это сообщение является ссылкой на пост. Кликните чтобы увидеть
-                  </NavLink>
-                </p>
-              } else {
-                return <p key={message._id} className="from-me">
-                  {message.message}
-                </p>
+          messages.length ?
+            <div className="message_list">
+              {
+                messages.map(message => {
+                  if (message.sender === user._id) {
+                    if (message.isLink) {
+                      return <p key={message._id} className="from-me">
+                        <NavLink to={'/post/' + message.message}>
+                          Это сообщение является ссылкой на пост. Кликните чтобы увидеть
+                        </NavLink>
+                      </p>
+                    } else {
+                      return <p key={message._id} className="from-me">
+                        {message.message}
+                      </p>
+                    }
+                  } else {
+                    if (message.isLink) {
+                      return <p key={message._id} className="from-them">
+                        <NavLink to={'/post/' + message.message}>
+                          Это сообщение является ссылкой на пост. Кликните чтобы увидеть
+                        </NavLink>
+                      </p>
+                    } else {
+                      return <p key={message._id} className="from-them">{message.message}</p>
+                    }
+                  }
+                })
               }
-            } else {
-              if (message.isLink) {
-                return <p key={message._id} className="from-them">
-                  <NavLink to={'/post/' + message.message}>
-                    Это сообщение является ссылкой на пост. Кликните чтобы увидеть
-                  </NavLink>
-                </p>
-              } else {
-                return <p key={message._id} className="from-them">{message.message}</p>
-              }
-            }
-          })
+            </div> :
+            null
         }
+
         <div ref={ref}/>
-        {currentUser ?
+        {currentUser && !chatLoading ?
             <form className="post_footer" onSubmit={sendMessage}>
               <input
                 type="text"

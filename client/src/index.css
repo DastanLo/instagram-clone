@@ -192,8 +192,9 @@ hr {
 .contacts_list {
     border: 1px solid #DBDBDB;
     padding: 10px;
-    height: 60vh;
     overflow: scroll;
+    box-sizing: border-box;
+    height: 70vh;
 }
 
 .contacts_list div {
@@ -216,33 +217,31 @@ hr {
     width: 100%;
     flex-grow: 1;
     max-width: 700px;
-    box-sizing: border-box;
     border-radius: 5px;
+}
+.message_list {
+    box-sizing: border-box;
+    padding-top: 10px;
     font-size: 20px;
     font-weight: normal;
-    height: 67vh;
-    max-height: 70vh;
+    min-height: 40vh;
     overflow-y: scroll;
     overflow-x: hidden;
     display: flex;
     flex-direction: column;
+    height: calc(70vh - 43px);
 }
-
 
 .message_window form {
     box-sizing: border-box;
     padding: 5px 0 5px 5px;
     z-index: 1000;
     background: #fafafa;
-    position: fixed;
-    bottom: 19.3%;
-    width: inherit;
     max-width: inherit;
 }
 .message_window_header {
     box-sizing: border-box;
     padding: 4px 0 3px 5px;
-    position: fixed;
     z-index: 1000;
     background: #ffffff;
     width: inherit;
@@ -453,13 +452,6 @@ hr {
 }
 
 @media screen and (max-width: 660px) {
-    .message_window_header {
-        width: 65%;
-    }
-    .message_window form {
-        width: 65%;
-        bottom: 21.6%;
-    }
     .message_window p {
         font-size: 13px;
         max-width: 150px;
@@ -535,13 +527,6 @@ hr {
     }
 }
 @media screen and (max-width: 460px){
-    .message_window_header {
-        width: 55%;
-    }
-    .message_window form {
-        width: 55%;
-        bottom: 21.6%;
-    }
     .btn {
         padding: 9px 6px;
         font-size: 11px;
@@ -571,10 +556,4 @@ hr {
     .message_window form > input::placeholder {
         font-size: 10px;
     }
-}
-@media screen and (max-height: 528px){
-
-}
-@media screen and (max-height: 528px) and (max-width: 660px){
-
 }
