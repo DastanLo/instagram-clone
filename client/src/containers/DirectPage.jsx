@@ -176,7 +176,7 @@ const DirectPage = () => {
                 })
               }
             </div> :
-            null
+            <div className="none-message"/>
         }
 
         <div ref={ref}/>

@@ -224,11 +224,13 @@ hr {
     padding-top: 10px;
     font-size: 20px;
     font-weight: normal;
-    min-height: 40vh;
     overflow-y: scroll;
     overflow-x: hidden;
     display: flex;
     flex-direction: column;
+    height: calc(70vh - 43px);
+}
+.none-message {
     height: calc(70vh - 43px);
 }
 
